@@ -54,69 +54,85 @@
     </div>
 </div>
 
+{{kullanici}}
+
 <script>
     var myapp = angular.module('myapp', ["ngSanitize", "ngCsv"]);
 
-    myapp.controller('myctrl', function ($scope) {
+    myapp.controller('myctrl', function ($scope,$http) {
 	    $scope.filename = "test";
 	    // $scope.getArray = [{a: 1, b:2}, {a:3, b:4}];
 
-$scope.getArray =  [  {
-    client_id: 1,
-    client_name: null,
-    client_email: 'kramer16@gmail.com',
-    client_password: 'pizza',
-    client_analytics_code: null,
-    client_creation_date: null },
-   {
-    client_id: 2,
-    client_name: null,
-    client_email: 'kramer1346@gmail.com',
-    client_password: 'pizza',
-    client_analytics_code: null,
-    client_creation_date: null },
-   {
-    client_id: 3,
-    client_name: null,
-    client_email: 'pizza2@gmail.com',
-    client_password: 'pizza',
-    client_analytics_code: null,
-    client_creation_date: null },
-   {
-    client_id: 4,
-    client_name: null,
-    client_email: 'elisha@gmail.com',
-    client_password: 'pizza',
-    client_analytics_code: null,
-    client_creation_date: null },
-   {
-    client_id: 5,
-    client_name: null,
-    client_email: 'aleph6@gmail.com',
-    client_password: 'pizza',
-    client_analytics_code: null,
-    client_creation_date: null },
-   {
-    client_id: 6,
-    client_name: null,
-    client_email: 'pizzaman@gmail.com',
-    client_password: 'pizza',
-    client_analytics_code: null,
-    client_creation_date: 2017-12-21},
-   {
-    client_id: 7,
-    client_name: null,
-    client_email: 'pizzahut@gmail.com',
-    client_password: 'pizza',
-    client_analytics_code: null,
-    client_creation_date: 2017-12-22 },
-   {
-    client_id: 8,
-    client_name: null,
-    client_email: 'pizzaplace@gmail.com',
-    client_password: 'pizza',
-    client_analytics_code: null,
-    client_creation_date: 2017-12-22} ];
+
+      // $scope.getSqlRows = function() { 
+         $http.get('/api/mysql')
+          .success(function(data) {
+            $scope.kullanici = data;
+            console.log(data);
+            $scope.getArray = data;
+        })
+          .error(function(data) {
+          console.log('Error: ' + data);
+      });
+  // };
+
+
+  // $scope.getArray =  [  {
+  //   client_id: 1,
+  //   client_name: null,
+  //   client_email: 'kramer16@gmail.com',
+  //   client_password: 'pizza',
+  //   client_analytics_code: null,
+  //   client_creation_date: null },
+  //  {
+  //   client_id: 2,
+  //   client_name: null,
+  //   client_email: 'kramer1346@gmail.com',
+  //   client_password: 'pizza',
+  //   client_analytics_code: null,
+  //   client_creation_date: null },
+  //  {
+  //   client_id: 3,
+  //   client_name: null,
+  //   client_email: 'pizza2@gmail.com',
+  //   client_password: 'pizza',
+  //   client_analytics_code: null,
+  //   client_creation_date: null },
+  //  {
+  //   client_id: 4,
+  //   client_name: null,
+  //   client_email: 'elisha@gmail.com',
+  //   client_password: 'pizza',
+  //   client_analytics_code: null,
+  //   client_creation_date: null },
+  //  {
+  //   client_id: 5,
+  //   client_name: null,
+  //   client_email: 'aleph6@gmail.com',
+  //   client_password: 'pizza',
+  //   client_analytics_code: null,
+  //   client_creation_date: null },
+  //  {
+  //   client_id: 6,
+  //   client_name: null,
+  //   client_email: 'pizzaman@gmail.com',
+  //   client_password: 'pizza',
+  //   client_analytics_code: null,
+  //   client_creation_date: 2017-12-21},
+  //  {
+  //   client_id: 7,
+  //   client_name: null,
+  //   client_email: 'pizzahut@gmail.com',
+  //   client_password: 'pizza',
+  //   client_analytics_code: null,
+  //   client_creation_date: 2017-12-22 },
+  //  {
+  //   client_id: 8,
+  //   client_name: null,
+  //   client_email: 'pizzaplace@gmail.com',
+  //   client_password: 'pizza',
+  //   client_analytics_code: null,
+  //   client_creation_date: 2017-12-22} ];
 
       $scope.addRandomRow = function() {
         $scope.getArray.push({a: Math.floor((Math.random()*10)+1), b: Math.floor((Math.random()*10)+1)});

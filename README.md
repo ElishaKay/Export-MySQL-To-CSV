@@ -1,3 +1,9 @@
+
+
+Based on: <a href="https://github.com/asafdav/ng-csv">this awesome project</a>
+
+___________________
+
 ngCsv - Export to CSV using AngularJS
 ======
 

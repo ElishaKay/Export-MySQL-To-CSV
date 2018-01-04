@@ -14,14 +14,17 @@ app.set('views', __dirname + '/views');
 app.use(express.static(path.join(__dirname, '/')));
 
 app.get('/',function(req,res){
-	 
-		connection.query("select * from client", function (err, rows) {
-			console.log(rows);            
 			 // res.sendFile(path.join(__dirname+'/example/index.html'));
   				//__dirname : It will resolve to your project folder.
-			  res.render('index.ejs', rows);
-        });
+			  res.render('index.ejs');   
 });
 
+
+app.get('/api/mysql',function(req,res){
+        var row = [];
+        connection.query('select * from client', function (err, rows) {
+            res.json(rows);
+        });      
+    });
 
 app.listen(8080, () => console.log('Example app listening on port 8080!'));
