@@ -59,6 +59,8 @@
 <script>
     var myapp = angular.module('myapp', ["ngSanitize", "ngCsv"]);
 
+    var dataArr = [];
+
     myapp.controller('myctrl', function ($scope,$http) {
 	    $scope.filename = "test";
 	    // $scope.getArray = [{a: 1, b:2}, {a:3, b:4}];
@@ -67,8 +69,9 @@
       // $scope.getSqlRows = function() { 
          $http.get('/api/mysql')
           .success(function(data) {
-            $scope.kullanici = data;
+            var dataArr = data;
             console.log(data);
+            debugger;
             $scope.getArray = data;
         })
           .error(function(data) {
