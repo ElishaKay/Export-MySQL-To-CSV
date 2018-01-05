@@ -14,8 +14,6 @@ app.set('views', __dirname + '/views');
 app.use(express.static(path.join(__dirname, '/')));
 
 app.get('/',function(req,res){
-			 // res.sendFile(path.join(__dirname+'/example/index.html'));
-  				//__dirname : It will resolve to your project folder.
 			  res.render('index.ejs');   
 });
 
@@ -26,6 +24,17 @@ app.get('/api/mysql',function(req,res){
 			function (err, rows) {
 				res.json(rows);
         });      
+    });
+
+
+      // Get row for the logged in user (i.e. client)
+    app.get('/api/user',function(req,res){
+        var row = [];
+        connection.query('select * from client where client_id = ?',[req.user.client_id], function (err, rows) {
+            
+            res.json(rows);
+        });
+      
     });
 
 app.listen(8080, () => console.log('Example app listening on port 8080!'));
