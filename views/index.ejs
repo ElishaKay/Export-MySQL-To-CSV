@@ -59,6 +59,11 @@
         <input type="text" id="filename" class="form-control" ng-model="filename">
       </div>
 
+      <div class="form-group">
+        <label for="client_id">Client ID </label>
+        <input type="text" id="filename" class="form-control" ng-model="client_id">
+      </div>
+
 
 <h3>How would you like your Leads Ordered?</h3>
 
@@ -70,7 +75,8 @@
       ng-csv="getArray" csv-label="true" filename="{{ filename }}.csv" field-separator="{{separator}}" decimal-separator="{{decimalSeparator}}"
       >Ordered by Date</button>
 
-
+<!-- Button to trigger modal -->
+<a href="#byCampaign" class="btn btn-primary" ng-click="exportByCampaign()" data-toggle="modal">Launch byCampaign modal</a>
 
     </div>
 </div>
@@ -81,11 +87,12 @@
 
     myapp.controller('myctrl', function ($scope,$http) {
 	    $scope.filename = "test";
+      $scope.client_id;
 	    // $scope.getArray = [{a: 1, b:2}, {a:3, b:4}];
 
 
-      // $scope.getSqlRows = function() { 
-         $http.get('/api/mysql')
+    $scope.exportByCampaign = function() { 
+         $http.get('/api/export/' + $scope.client_id)
           .success(function(data) {
             console.log(data);
             // debugger;
@@ -94,7 +101,7 @@
           .error(function(data) {
           console.log('Error: ' + data);
       });
-  // };
+  };
 
 
 
@@ -114,16 +121,15 @@
 
 <div class="container">
 
-<!-- Button to trigger modal -->
-<a href="#myModal" class="btn btn-primary" data-toggle="modal">Launch demo modal</a>
+
  
   <!-- Modal -->
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal fade" id="byCampaign" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-          <h4 class="modal-title">Warning!</h4>
+          <h4 class="modal-title">byCampaign</h4>
         </div>
         <div class="modal-body">
           Your current session will expire in 5 minutes. Please Save your changes to continue your session, otherwise you will lose all unsaved data and your session will time out.
@@ -136,7 +142,29 @@
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
   
-  
+ <a href="#byDate" class="btn btn-primary" data-toggle="modal">Launch demo modal</a>
+ 
+  <!-- Modal -->
+  <div class="modal fade" id="byDate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+          <h4 class="modal-title">byDate</h4>
+        </div>
+        <div class="modal-body">
+          Your current session will expire in 5 minutes. Please Save your changes to continue your session, otherwise you will lose all unsaved data and your session will time out.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+ 
+
+
 </div>
 
 </body>
