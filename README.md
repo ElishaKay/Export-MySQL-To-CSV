@@ -1,4 +1,39 @@
+Step 1: Add a .env file to your root directory that includes MySQL Creds - should look like this:
 
+```bash
+HOST=the.ip.goes.here	
+DATABASE=yourdbname
+USER=username
+PASSWORD=thepassword
+```
+
+Getting Started
+---------------
+
+The easiest way to get started is to clone the repository:
+
+```bash
+# Get the latest snapshot
+git clone https://github.com/ElishaKay/Export-MySQL-To-CSV
+
+# Change directory
+cd Export-MySQL-To-CSV
+
+# Install NPM dependencies
+npm install
+
+# Then simply start your app
+node server
+
+or:
+
+nodemon server
+
+```
+
+
+
+___________________________________________________
 
 Based on: <a href="https://github.com/asafdav/ng-csv">this awesome project</a>
 
