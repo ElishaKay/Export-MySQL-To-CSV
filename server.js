@@ -18,34 +18,12 @@ app.get('/',function(req,res){
 });
 
 
-
-
-    // app.get('/api/viewlikes/:postID',isLoggedIn,function(req,res){
-    //     var postID = req.params.postID;
-    //     var row = [];
-
-
 app.get('/api/export/:id',function(req,res){
         var client_id = req.params.id;
         console.log(client_id);
-            connection.query("select IFNULL(r.receiver_first_name,'') as 'First Name' , IFNULL(r.receiver_last_name,'') as 'Last Name', IFNULL(r.receiver_headline,'') as 'Headline', IFNULL(r.receiver_username,'') as 'Username', IFNULL(r.receiver_profile_id,'') as 'SN Profile_id', IFNULL(r.receiver_email,'') as 'Email', CONVERT(r.receiver_phone USING utf8) as 'Phone', IFNULL(r.receiver_location,'') as 'Location', IFNULL(r.receiver_linkedin_url,'') as 'LinkedIn Url', IFNULL(r.receiver_twitter_url,'') as 'Twitter Url', CONVERT(r.receiver_websites USING utf8) as 'Websites', CONVERT(r.receiver_ims USING utf8) as 'Ims', IFNULL(r.receiver_birthday,'') as 'Birthday', DATE_FORMAT(ur.user_receiver_creation_date, '%M %d, %Y') as 'Connection Date' from user_receiver ur inner join user u on (u.user_id = ur.user_id) inner join client cl on (cl.client_id = u.client_id) inner join receiver r on (r.receiver_id=ur.receiver_id) where cl.client_id=?",[client_id],function(err, rows) {
-            res.json(rows);
-          });                
-    });
-
-
-
-
-
-
-      // Get row for the logged in user (i.e. client)
-    app.get('/export/byDate',function(req,res){
-        var row = [];
-        connection.query('select * from client where client_id = ?',[req.user.client_id], function (err, rows) {
-            
-            res.json(rows);
-        });     
-    });
-
+        connection.query("select IFNULL(r.receiver_first_name,'') as 'First Name' , IFNULL(r.receiver_last_name,'') as 'Last Name', IFNULL(r.receiver_headline,'') as 'Headline', IFNULL(r.receiver_username,'') as 'Username', IFNULL(r.receiver_profile_id,'') as 'SN Profile_id', IFNULL(r.receiver_email,'') as 'Email', CONVERT(r.receiver_phone USING utf8) as 'Phone', IFNULL(r.receiver_location,'') as 'Location', IFNULL(r.receiver_linkedin_url,'') as 'LinkedIn Url', IFNULL(r.receiver_twitter_url,'') as 'Twitter Url', CONVERT(r.receiver_websites USING utf8) as 'Websites', CONVERT(r.receiver_ims USING utf8) as 'Ims', IFNULL(r.receiver_birthday,'') as 'Birthday', DATE_FORMAT(ur.user_receiver_creation_date, '%M %d, %Y') as 'Connection Date' from user_receiver ur inner join user u on (u.user_id = ur.user_id) inner join client cl on (cl.client_id = u.client_id) inner join receiver r on (r.receiver_id=ur.receiver_id) where cl.client_id=?",[client_id],function(err, rows) {
+        res.json(rows);
+    });                
+});
 
 app.listen(8080, () => console.log('Example app listening on port 8080!'));
